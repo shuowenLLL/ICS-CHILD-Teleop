@@ -18,7 +18,7 @@ Python environment is described separately below.
 
 [![ICS CHILD complete hardware connection](docs/hardware/child_hardware_connection.svg)](docs/hardware/child_hardware_connection.svg)
 
-Click the connection diagram to open it at full size.
+
 
 ## Repositories
 
@@ -27,9 +27,7 @@ Click the connection diagram to open it at full size.
   tools.
 - [`PAPRAS-V0-Public`](https://github.com/shuowenLLL/PAPRAS-V0-Public):
   provides the `papras_hardware_interface/DynamixelHardware` ROS 2 Control
-  plugin used by `teleop_leaders`. It opens the DYNAMIXEL serial bus, applies
-  the servo configuration, reads position/velocity/current, writes
-  position/current commands, and contains the corrected XL330 indirect-read
+  plugin used by `teleop_leaders`. It opens the DYNAMIXEL serial bus and contains the corrected XL330 indirect-read
   address (`230`).
 - [`DynamixelSDK`](https://github.com/ROBOTIS-GIT/DynamixelSDK): low-level
   ROBOTIS serial communication SDK used by the PAPRAS hardware plugin and
