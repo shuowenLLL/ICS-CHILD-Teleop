@@ -6,6 +6,20 @@ for the ICS CHILD teleoperation system.
 This repository prepares the **CHILD/leader computer**. The G1 robot-side
 Python environment is described separately below.
 
+## Hardware overview
+
+### CHILD leader hardware
+
+<p align="center">
+  <img src="docs/hardware/hardware_child.jpg" alt="CHILD leader hardware" width="420">
+</p>
+
+### Complete hardware connection
+
+[![ICS CHILD complete hardware connection](docs/hardware/child_hardware_connection.svg)](docs/hardware/child_hardware_connection.svg)
+
+Click the connection diagram to open it at full size.
+
 ## Repositories
 
 - [`CHILD`](https://github.com/shuowenLLL/CHILD): leader robot description,
