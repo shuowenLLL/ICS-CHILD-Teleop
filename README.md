@@ -159,6 +159,117 @@ ros2 launch teleop_leaders leader_hw_g1_all_limbs.launch.py
 The current leader configuration expects `/dev/ttyUSB0` at `1000000` baud.
 Verify the port before starting real hardware.
 
+## DYNAMIXEL setup and diagnostic tools
+
+`CHILD/teleop_leaders` includes three tools for commissioning and diagnosing
+the leader servos:
+
+- `scan_servo_ids.py`: scans servo IDs and baud rates without changing servo
+  settings.
+- `edit_servo_config.py`: compares or applies the ID, return delay, homing
+  offset, drive mode, operating mode, torque state, and baud rate from the
+  leader YAML configuration.
+- `single_servo_safe_test.py`: pings one servo and reads its position; movement
+  is disabled unless `--move` is explicitly provided.
+
+Before using these tools, stop `leader_hw_g1_all_limbs.launch.py` and any other
+program using `/dev/ttyUSB0`. Only one process should access the DYNAMIXEL
+serial port at a time.
+
+From the workspace root, source the environment:
+
+```bash
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+```
+
+### Scan servo IDs and baud rates
+
+Scan IDs `1..253` at all common baud rates:
+
+```bash
+ros2 run teleop_leaders scan_servo_ids.py --port /dev/ttyUSB0
+```
+
+Scan a smaller range at `1000000` baud:
+
+```bash
+ros2 run teleop_leaders scan_servo_ids.py \
+  --port /dev/ttyUSB0 \
+  --baud 1000000 \
+  --start-id 1 \
+  --end-id 22
+```
+
+Repeat `--baud` to scan several selected baud rates. The default protocol is
+DYNAMIXEL Protocol 2.0.
+
+### Inspect or apply one servo configuration
+
+List the joints and target IDs from `g1_leaders_all_limbs.yaml`:
+
+```bash
+ros2 run teleop_leaders edit_servo_config.py --list-joints
+```
+
+Connect one servo, then preview the changes for a joint:
+
+```bash
+ros2 run teleop_leaders edit_servo_config.py \
+  --port /dev/ttyUSB0 \
+  --baud 1000000 \
+  --joint right_shoulder_pitch_joint
+```
+
+The command above is a dry run and does not write changes. After reviewing the
+output, add `--yes` to apply them:
+
+```bash
+ros2 run teleop_leaders edit_servo_config.py \
+  --port /dev/ttyUSB0 \
+  --baud 1000000 \
+  --joint right_shoulder_pitch_joint \
+  --yes
+```
+
+If several servos are connected, pass the current servo ID explicitly with
+`--id`. Do not confuse the current ID (`--id`) with the target ID stored in the
+joint configuration.
+
+### Test one servo safely
+
+Ping ID `1` and read its current position without enabling torque:
+
+```bash
+ros2 run teleop_leaders single_servo_safe_test.py \
+  --port /dev/ttyUSB0 \
+  --baud 1000000 \
+  --id 1
+```
+
+Only after the servo is mechanically safe to move, request a small movement:
+
+```bash
+ros2 run teleop_leaders single_servo_safe_test.py \
+  --port /dev/ttyUSB0 \
+  --baud 1000000 \
+  --id 1 \
+  --move \
+  --amplitude 50
+```
+
+The movement test enables torque temporarily and disables it after the test.
+Keep people and equipment clear of the mechanism.
+
+If `ros2 run` cannot find one of the scripts after updating `CHILD`, rebuild the
+package:
+
+```bash
+source /opt/ros/humble/setup.bash
+colcon build --symlink-install --packages-select teleop_leaders
+source install/setup.bash
+```
+
 ## G1 robot-side installation
 
 The G1 side is separate from the CHILD/leader Docker environment. Based on the
