@@ -4,11 +4,11 @@ ROS 2 Humble workspace manifest and setup tools for the ICS CHILD teleoperation 
 
 ## Repositories
 
-- `CHILD`: ICS teleoperation and diagnostic tools
-- `PAPRAS-V0-Public`: PAPRAS controls with the XL330 indirect-read fix
-- `DynamixelSDK`: ROBOTIS DYNAMIXEL SDK
-- `dynamixel_interfaces`: ROS 2 interfaces for DYNAMIXEL
-- `ros-imu-bno055`: BNO055 IMU driver
+- [`CHILD`](https://github.com/shuowenLLL/CHILD): teleoperation and diagnostic tools
+- [`PAPRAS-V0-Public`](https://github.com/shuowenLLL/PAPRAS-V0-Public): PAPRAS controls with the XL330 indirect-read fix
+- [`DynamixelSDK`](https://github.com/ROBOTIS-GIT/DynamixelSDK): ROBOTIS DYNAMIXEL SDK
+- [`dynamixel_interfaces`](https://github.com/ROBOTIS-GIT/dynamixel_interfaces): ROS 2 interfaces for DYNAMIXEL
+- [`ros-imu-bno055`](https://github.com/dheera/ros-imu-bno055): BNO055 IMU driver
 
 ## Create a workspace
 
