@@ -204,15 +204,26 @@ ros2 run teleop_leaders scan_servo_ids.py \
 Repeat `--baud` to scan several selected baud rates. The default protocol is
 DYNAMIXEL Protocol 2.0.
 
-### Inspect or apply one servo configuration
+### Configure and calibrate servos
 
-List the joints and target IDs from `g1_leaders_all_limbs.yaml`:
+`edit_servo_config.py` modifies the configuration stored in a DYNAMIXEL servo.
+The current CHILD leader servos were configured from the complete joint
+settings in the official CHILD file
+`teleop_leaders/config/g1_leaders_all_limbs.yaml`. The file defines the target
+ID, return delay, homing offset, drive mode, operating mode, and torque state
+for every leader joint.
+
+The script handles one servo per command. Repeat the procedure for each joint
+when configuring the complete leader system. For safety, connect only one
+servo at a time, or specify its current ID explicitly with `--id`.
+
+List the available joints and their target IDs:
 
 ```bash
 ros2 run teleop_leaders edit_servo_config.py --list-joints
 ```
 
-Connect one servo, then preview the changes for a joint:
+Preview the official YAML configuration for one joint:
 
 ```bash
 ros2 run teleop_leaders edit_servo_config.py \
@@ -221,8 +232,9 @@ ros2 run teleop_leaders edit_servo_config.py \
   --joint right_shoulder_pitch_joint
 ```
 
-The command above is a dry run and does not write changes. After reviewing the
-output, add `--yes` to apply them:
+This is a dry run: it reads the servo and displays the planned changes without
+writing them. After checking the current servo, joint name, and target values,
+add `--yes` to apply the configuration:
 
 ```bash
 ros2 run teleop_leaders edit_servo_config.py \
@@ -232,9 +244,26 @@ ros2 run teleop_leaders edit_servo_config.py \
   --yes
 ```
 
-If several servos are connected, pass the current servo ID explicitly with
-`--id`. Do not confuse the current ID (`--id`) with the target ID stored in the
-joint configuration.
+Command-line options can override values from the YAML file. For example, use
+`--homing-offset` to apply a manually determined calibration offset:
+
+```bash
+ros2 run teleop_leaders edit_servo_config.py \
+  --port /dev/ttyUSB0 \
+  --baud 1000000 \
+  --id 1 \
+  --new-id 1 \
+  --homing-offset 2048
+```
+
+Review the dry-run output, then repeat the command with `--yes` to write it.
+The tool can also override `--new-id`, `--return-delay`, `--drive-mode`,
+`--operating-mode`, `--torque-enable`, and `--target-baud`.
+
+Calibration here means writing a known `Homing Offset`; the script does not
+automatically measure or calculate the correct offset. Do not confuse the
+current servo ID (`--id`) with the desired ID (`--new-id` or the ID selected by
+`--joint`).
 
 ### Test one servo safely
 
