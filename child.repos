@@ -1,0 +1,21 @@
+repositories:
+  CHILD:
+    type: git
+    url: https://github.com/shuowenLLL/CHILD.git
+    version: main
+  PAPRAS-V0-Public:
+    type: git
+    url: https://github.com/shuowenLLL/PAPRAS-V0-Public.git
+    version: ros2_humble
+  DynamixelSDK:
+    type: git
+    url: https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+    version: humble
+  dynamixel_interfaces:
+    type: git
+    url: https://github.com/ROBOTIS-GIT/dynamixel_interfaces.git
+    version: humble
+  ros-imu-bno055:
+    type: git
+    url: https://github.com/dheera/ros-imu-bno055.git
+    version: master
