@@ -25,6 +25,12 @@ The setup script imports all source repositories into `src/`. Generated
 `build/`, `install/`, and `log/` directories are intentionally excluded from
 Git.
 
+## Docker
+
+For a reproducible ROS 2 Humble environment, follow [DOCKER.md](DOCKER.md).
+It includes the commands to build the image, import the source repositories,
+install ROS package dependencies, and build the workspace.
+
 ## Update source repositories
 
 ```bash
