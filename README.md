@@ -3,12 +3,12 @@
 A reproducible ROS 2 Humble and Docker-based integration of the CHILD
 whole-body teleoperation system for the Unitree G1 humanoid robot.
 
-This integration was completed as part of my HiWi work at the Institute for
+This integration was completed as part of HiWi work at the Institute for
 Cognitive Systems, Technical University of Munich (TUM). It builds on the
 original CHILD system developed by KIMLAB at the University of Illinois
 Urbana-Champaign.
 
-## My contributions
+## Contributions
 
 - Assembled and electrically integrated the CHILD leader system
 - Wired and brought up the DYNAMIXEL actuators, Raspberry Pi 5, U2D2, and
