@@ -1,10 +1,25 @@
-# ICS CHILD Teleoperation Workspace
+# CHILD Whole-Body Teleoperation Integration
 
-ROS 2 Humble workspace manifest, installation scripts, and Docker environment
-for the ICS CHILD teleoperation system.
+A reproducible ROS 2 Humble and Docker-based integration of the CHILD
+whole-body teleoperation system for the Unitree G1 humanoid robot.
 
-This repository prepares the **CHILD/leader computer**. The G1 robot-side
-Python environment is described separately below.
+This integration was completed as part of my HiWi work at the Institute for
+Cognitive Systems, Technical University of Munich (TUM). It builds on the
+original CHILD system developed by KIMLAB at the University of Illinois
+Urbana-Champaign.
+
+## My contributions
+
+- Assembled and electrically integrated the CHILD leader system
+- Wired and brought up the DYNAMIXEL actuators, Raspberry Pi 5, U2D2, and
+  BNO055 IMU
+- Deployed the ROS 2 Humble stack in Docker on the leader computer
+- Developed tools for servo identification, configuration, calibration, and
+  diagnostics
+- Integrated and documented the end-to-end leader-to-G1 teleoperation pipeline
+
+This repository focuses on preparing the **CHILD leader computer**. The
+separate G1 robot-side Python environment is described below.
 
 ## Hardware overview
 
